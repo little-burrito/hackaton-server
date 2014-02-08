@@ -12,27 +12,24 @@ window.profilepic;
 window.userid;
 window.forward;
 
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '596872700396629',
-    status     : true, // check login status
-    cookie     : true, // enable cookies to allow the server to access the session
-    xfbml      : true  // parse XFBML
-  });
-  // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
-  // for any authentication related change, such as login, logout or session refresh. This means that
-  // whenever someone who was previously logged out tries to log in again, the correct case below 
-  // will be handled. 
-  console.log("test");
-
-  FB.Event.subscribe('auth.login', function(response) {
-    if (response.connected == 'connected') {
-      console.log("connected");
-    }else{
-      console.log("not connected");
-    };
-  });
-  }
+  window.fbAsyncInit = function(){
+    FB.init({
+      appId      : '596872700396629',
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+    console.log("test");
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        console.log("connected");
+      } else if (response.status === 'not_authorized') {
+        console.log("not auth");
+      } else {
+        console.log("not logged in");
+      }
+    });
+  };
 
   // Load the SDK asynchronously
   (function(d){
