@@ -64,7 +64,7 @@
       console.log('Your id is ' + response.id) ;
     });
     FB.api(
-      "/me/picture",
+      '/me/picture',
       {
         "redirect": false,
         "height": "200",
@@ -73,9 +73,9 @@
       },
       function (response){
         if (response && !response.error){
-          console.log('Profile pic' + response.url
+          console.log('Profile pic' + response.url);
         } else {
-          console.log('error or nil response from picture')
+          console.log('error or nil response from picture');
         }
       });
   }
