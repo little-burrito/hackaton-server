@@ -7,15 +7,38 @@
 <body>
 <div id="fb-root"></div>
 <script>
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '596872700396629',
-    status     : true, // check login status
-    cookie     : true, // enable cookies to allow the server to access the session
-    xfbml      : true  // parse XFBML
+  Parse.FacebookUtils.logIn("user_likes,email,", {
+    success: function(user) {
 
+      if (!Parse.FacebookUtils.isLinked(user)) {
+        Parse.FacebookUtils.link(user, null, {
+          success: function(user) {
+            alert("Woohoo, user logged in with Facebook!");
+          },
+          error: function(user, error) {
+            alert("User cancelled the Facebook login or did not fully authorize.");
+          }
+        });
+      }
+      else if (!user.existed()) {
+
+        alert("User signed up and logged in through Facebook!");
+      } else {
+        alert("User logged in through Facebook!");
+      }
+    },
+    error: function(user, error) {
+      alert("User cancelled the Facebook login or did not fully authorize.");
+    }
   });
-
+  window.fbAsyncInit = function() {
+  Parse.FacebookUtils.init({
+    appId      : '596872700396629', // Facebook App ID
+    channelUrl : '//ec2-54-194-231-254.eu-west-1.compute.amazonaws.com', // Channel File
+    status     : true, // check login status
+    cookie     : true, // enable cookies to allow Parse to access the session
+    xfbml      : true  // parse XFBML
+  });
   // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
   // for any authentication related change, such as login, logout or session refresh. This means that
   // whenever someone who was previously logged out tries to log in again, the correct case below 
