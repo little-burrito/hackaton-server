@@ -72,40 +72,40 @@ window.forward;
       window.userid = response.id;
       if (response.name && response.id) {
         window.forward = true;
+        FB.api(
+          '/me/picture',
+          {
+            "redirect": false,
+            "height": "200",
+            "type": "normal",
+            "width": "200"
+          },
+          function (response){
+            if (response && !response.error){
+              console.log('Profile pic' + response.data.url);
+              window.profilepic = response.data.url;
+              window.forward = true;
+              if (window.forward){
+                console.log("forward is true");
+                var fbparams = [];
+                fbparams["username"] = window.username;
+                fbparams["userid"] = window.userid;
+                fbparams["profilepic"] = window.profilepic;
+                console.log(fbparams);
+                //post_to_url('http://54.194.231.254/hackaton-server/register-user.php', fbparams);
+              }else{
+                console.log("Forward is false");
+              }
+            } else {
+              console.log('error or nil response from picture');
+              window.forward = false;
+            }
+          });
       }else{
         window.forward = false;
       };
       
     });
-    FB.api(
-      '/me/picture',
-      {
-        "redirect": false,
-        "height": "200",
-        "type": "normal",
-        "width": "200"
-      },
-      function (response){
-        if (response && !response.error){
-          console.log('Profile pic' + response.data.url);
-          window.profilepic = response.data.url;
-          window.forward = true;
-        } else {
-          console.log('error or nil response from picture');
-          window.forward = false;
-        }
-      });
-    if (window.forward){
-      console.log("forward is true");
-      var fbparams = [];
-      fbparams["username"] = window.username;
-      fbparams["userid"] = window.userid;
-      fbparams["profilepic"] = window.profilepic;
-      console.log(fbparams);
-      //post_to_url('http://54.194.231.254/hackaton-server/register-user.php', fbparams);
-    }else{
-      console.log("Forward is false");
-    }
   }
   function post_to_url(path, params, method) {
     console.log('posting to url now');
