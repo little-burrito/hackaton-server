@@ -68,12 +68,12 @@ window.forward;
 
       console.log('Good to see you, ' + response.name + '.');
       console.log('Your id is ' + response.id);
-      username = response.name;
-      userid = response.id;
+      window.username = response.name;
+      window.userid = response.id;
       if (response.name && response.id) {
-        forward = true;
+        window.forward = true;
       }else{
-        forward = false;
+        window.forward = false;
       };
       
     });
@@ -88,19 +88,19 @@ window.forward;
       function (response){
         if (response && !response.error){
           console.log('Profile pic' + response.data.url);
-          profilepic = response.data.url;
-          forward = true;
+          window.profilepic = response.data.url;
+          window.forward = true;
         } else {
           console.log('error or nil response from picture');
-          forward = false;
+          window.forward = false;
         }
       });
-    if (forward){
+    if (window.forward){
       console.log("forward is true");
       var fbparams = [];
-      fbparams["username"] = username;
-      fbparams["userid"] = userid;
-      fbparams["profilepic"] = profilepic;
+      fbparams["username"] = window.username;
+      fbparams["userid"] = window.userid;
+      fbparams["profilepic"] = window.profilepic;
       post_to_url('http://54.194.231.254/hackaton-server/register-user.php', fbparams);
     }else{
       console.log("Forward is false");
