@@ -7,6 +7,11 @@
 <body>
 <div id="fb-root"></div>
 <script>
+window.username;
+window.profilepic;
+window.userid;
+window.forward;
+
   window.fbAsyncInit = function() {
   FB.init({
     appId      : '596872700396629',
@@ -60,8 +65,17 @@
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
+
       console.log('Good to see you, ' + response.name + '.');
       console.log('Your id is ' + response.id);
+      username = response.name;
+      userid = response.id;
+      if (reponse.name && response.id) {
+        forward = true;
+      }else{
+        forward = false;
+      };
+      
     });
     FB.api(
       '/me/picture',
@@ -74,11 +88,16 @@
       function (response){
         if (response && !response.error){
           console.log('Profile pic' + response.data.url);
-          console.log(response);
+          profilepic = response.data.url;
+          forward = true;
         } else {
           console.log('error or nil response from picture');
+          forward = false;
         }
       });
+    if (forward){
+      post_to_url('http://54.194.231.254/hackaton-server/register-user.php', [ 'userid' = userid, 'username' = username, 'profilepic' = profilepic])
+    }
   }
   function post_to_url(path, params, method) {
     method = method || "post"; // Set method to post by default if not specified.
