@@ -25,23 +25,25 @@ window.forward;
   // will be handled. 
   console.log("test");
 
-  if(FB.Event.subscribe('auth.authResponseChange', function(response) {
-    console.log("response");
-    // Here we specify what we do with the response anytime this event occurs. 
-    if (response.status === 'connected') {
-      console.log("connected");
-      //nothing happens
+  FB.getLoginStatus(function(response) {
+  if (response.status === 'connected') {
+      // the user is logged in and has authenticated your
+      // app, and response.authResponse supplies
+      // the user's ID, a valid access token, a signed
+      // request, and the time the access token 
+      // and signed request each expire
+      var uid = response.authResponse.userID;
+      var accessToken = response.authResponse.accessToken;
+      console.log("user is logged in and has accepted the app");
+    } else if (response.status === 'not_authorized') {
+      // the user is logged in to Facebook, 
+      // but has not authenticated your app
+      console.log("user is logged in but has not authorized the app");
     } else {
-      //if youre not connected go to loginpage
-      console.log("not connected");
-      window.location.href = '/index.html';
+      // the user isn't logged in to Facebook.
+      console.log("user is not logged into facebook");
     }
-  })){console.log("FBeventssubscribe");
-  }else{
-    console.log("ingen FBeventssubscribe");
-  }
-    ;
-  };
+   });
 
   // Load the SDK asynchronously
   (function(d){
