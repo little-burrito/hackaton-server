@@ -96,7 +96,14 @@ window.forward;
         }
       });
     if (forward){
-      post_to_url('http://54.194.231.254/hackaton-server/register-user.php', [ 'userid' = userid, 'username' = username, 'profilepic' = profilepic])
+      console.log("forward is true");
+      var fbparams = [];
+      fbparams["username"] = username;
+      fbparams["userid"] = userid;
+      fbparams["profilepic"] = profilepic;
+      post_to_url('http://54.194.231.254/hackaton-server/register-user.php', fbparams);
+    }else{
+      console.log("Forward is false");
     }
   }
   function post_to_url(path, params, method) {
