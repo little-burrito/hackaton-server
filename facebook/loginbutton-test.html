@@ -24,7 +24,8 @@ window.forward;
   // whenever someone who was previously logged out tries to log in again, the correct case below 
   // will be handled. 
   console.log("test");
-  FB.Event.subscribe('auth.authResponseChange', function(response) {
+
+  if(FB.Event.subscribe('auth.authResponseChange', function(response) {
     console.log("response");
     // Here we specify what we do with the response anytime this event occurs. 
     if (response.status === 'connected') {
@@ -35,7 +36,11 @@ window.forward;
       console.log("not connected");
       window.location.href = '/index.html';
     }
-  });
+  })){console.log("FBeventssubscribe");
+  }else{
+    console.log("ingen FBeventssubscribe");
+  }
+    ;
   };
 
   // Load the SDK asynchronously
