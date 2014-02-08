@@ -27,6 +27,7 @@ window.forward;
   FB.Event.subscribe('auth.authResponseChange', function(response) {
     // Here we specify what we do with the response anytime this event occurs. 
     if (response.status === 'connected') {
+      console.log("connected");
       //nothing happens
     } else {
       //if youre not connected go to loginpage
