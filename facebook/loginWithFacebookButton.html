@@ -62,6 +62,7 @@
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
       console.log('Your id is ' + response.id) ;
+      console.log('Your picture URL: ' + response.picture.url);
     });
     FB.api(
       '/me/picture',
@@ -74,6 +75,7 @@
       function (response){
         if (response && !response.error){
           console.log('Profile pic' + response.url);
+          console.log('Profile (.picture.url) pic' + response.picture.url);
         } else {
           console.log('error or nil response from picture');
         }
