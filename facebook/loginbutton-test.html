@@ -25,8 +25,10 @@ window.forward;
         console.log("connected");
       } else if (response.status === 'not_authorized') {
         console.log("not auth");
+        window.location.replace('/index.html');
       } else {
         console.log("not logged in");
+        window.location.replace('/index.html');
       }
     });
   };
