@@ -7,25 +7,11 @@
 <body>
 <div id="fb-root"></div>
 <script>
-
-  Parse.FacebookUtils.logIn(null, {
-    success: function(user) {
-      if (!user.existed()) {
-        alert("User signed up and logged in through Facebook!");
-      } else {
-        alert("User logged in through Facebook!");
-      }
-    },
-    error: function(user, error) {
-      alert("User cancelled the Facebook login or did not fully authorize.");
-    }
-  });
   window.fbAsyncInit = function() {
-  Parse.FacebookUtils.init({
-    appId      : '596872700396629', // Facebook App ID
-    channelUrl : '//ec2-54-194-231-254.eu-west-1.compute.amazonaws.com', // Channel File
+  FB.init({
+    appId      : '596872700396629',
     status     : true, // check login status
-    cookie     : true, // enable cookies to allow Parse to access the session
+    cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
   });
   // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
@@ -75,6 +61,7 @@
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Good to see you, ' + response.name + '.');
+      console.log('Your id is ' + response.id)
     });
   }
 </script>
