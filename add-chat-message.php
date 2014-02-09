@@ -1,5 +1,5 @@
 <?php
-include("/hackaton-server/dbinfo.php");
+include("dbinfo.php");
 
 $userid = intval($_GET["userid"]);
 $circleid = intval($_GET["circleid"]);
