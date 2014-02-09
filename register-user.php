@@ -1,9 +1,9 @@
 <?php 
 include('dbinfo.php');
 
-$facebook_id = $_GET[ 'userid' ];
-$name = $_GET[ 'username' ];
-$profile_picture = $_GET[ 'profilepic' ]; 
+$facebook_id = $_POST[ 'userid' ];
+$name = $_POST[ 'username' ];
+$profile_picture = $_POST[ 'profilepic' ]; 
 
 $mysqli = new mysqli( $db[ 'server' ], $db[ 'username' ], $db[ 'password'], $db[ 'database' ] );
 if ( $mysqli->connect_errno ) {
